@@ -65,28 +65,67 @@ calculate = () => {
         
         for (let pas = 0; pas <= this.state.result.length; pas++) {
      
+            console.log(pas);
 
-            if (this.state.result[pas] !== "*" || this.state.result[pas] !== "/"|| this.state.result[pas] !== "+" || this.state.result[pas] !=="-")
+            if (this.state.result[pas] !== "*" || this.state.result[pas] !== "/"|| this.state.result[pas] !== "+" || this.state.result[pas] !=="-"){
 
             //if ( Number.isInteger(this.state.result[pas])=== true){
                 var temp = parseInt(this.state.result[pas]);
                 console.log(this.state.result[pas]);  
                 mapile_tempo.push(temp);
-                
-
+            }
                         
 
             if (this.state.result[pas] === "*" || this.state.result[pas] === "/"|| this.state.result[pas] === "+" || this.state.result[pas] ==="-"){
 
-                mapile_tempo.push();
+                
+                console.log(this.state.result[pas]);
+                mapile_tempo.push(this.state.result[pas]);
+                
             }
 
 
-            
 
           }
 
 
+          // On agit directement sur la pile obtenant les opérations 
+          for(let pas = 0 ; pas <= mapile_tempo.length; pas ++){
+
+
+            if (this.state.result[pas] === "*" || this.state.result[pas] === "/"|| this.state.result[pas] === "+" || this.state.result[pas] ==="-"){
+
+
+                var resultat = this.state.result[pas-2] * this.state.result[pas-1];
+                this.state.result[pas].shift();
+
+            }
+
+
+            if ( this.state.result[pas] === "/"){
+
+
+                var resultat_division = this.state.result[0] / this.state.result[1];
+                this.state.result[pas].shift();
+            }
+
+            if ( this.state.result[pas] === "+"){
+
+
+                var resultat_addition = this.state.result[0] + this.state.result[1];
+                this.state.result[pas].shift();
+
+            }
+
+            if ( this.state.result[pas] === "-"){
+
+
+                var resultat_soustraction = this.state.result[0] - this.state.result[1];
+                this.state.result[pas].shift();
+
+            }
+
+          }
          
 
         }
