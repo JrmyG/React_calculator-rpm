@@ -59,24 +59,38 @@ calculate = () => {
 
         // Il faut définir encore la régle pour que les chiffres effectuent la bonne opération.
 
-        var tableau = [this.state.result];
+
+
+
+
+        var tableau = [];
         var mapile_tempo;
         //var mapile_tempo_signe;
         
-        for (let pas = 0; pas <= this.state.result.length; pas++) {
+
+        // Init du tableau en String 
+        for (let pas = 0; pas <= this.state.result.length -1; pas++){
+           
+            
+            tableau.push(this.state.result[pas]);
+            console.log(tableau[pas]);
+        
+        }
+
+
+        for (let pas = 0; pas <= tableau.length; pas++) {
      
-            console.log(pas);
+            //console.log(tableau[pas]);
 
             if (this.state.result[pas] !== "*" || this.state.result[pas] !== "/"|| this.state.result[pas] !== "+" || this.state.result[pas] !=="-"){
 
             //if ( Number.isInteger(this.state.result[pas])=== true){
                 var temp = parseInt(this.state.result[pas]);
-                console.log(this.state.result[pas]);  
                 mapile_tempo.push(temp);
             }
                         
 
-            if (this.state.result[pas] === "*" || this.state.result[pas] === "/"|| this.state.result[pas] === "+" || this.state.result[pas] ==="-"){
+            else if (tableau[pas] === "*" || tableau[pas] === "/"|| tableau[pas] === "+" || tableau[pas] ==="-"){
 
                 
                 console.log(this.state.result[pas]);
