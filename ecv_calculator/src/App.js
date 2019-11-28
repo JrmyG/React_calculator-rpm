@@ -64,50 +64,81 @@ calculate = () => {
 
 
         var tableau = [];
-        var mapile_tempo;
+        var tableau2 = [];
         //var mapile_tempo_signe;
         
 
-        // Init du tableau en String 
-        for (let pas = 0; pas <= this.state.result.length -1; pas++){
+        // Init du tableau en String => Parcours du tableau ok 
+        /*for (let pas = 0; pas <= this.state.result.length -1; pas++){
            
             
             tableau.push(this.state.result[pas]);
-            console.log(tableau[pas]);
+            //console.log(tableau[pas]);
         
         }
+*/
 
+        
 
-        for (let pas = 0; pas <= tableau.length; pas++) {
+        for (let pas = 0; pas <= this.state.result.length ; pas++) {
      
             //console.log(tableau[pas]);
 
-            if (this.state.result[pas] !== "*" || this.state.result[pas] !== "/"|| this.state.result[pas] !== "+" || this.state.result[pas] !=="-"){
+            if (this.state.result[pas] === "0"||this.state.result[pas] === "1" || this.state.result[pas] === "2"|| this.state.result[pas] === "3" || this.state.result[pas] === "4" || this.state.result[pas] === "5"|| this.state.result[pas] === "6"|| this.state.result[pas] === "7"|| this.state.result[pas] === "8"|| this.state.result[pas] === "9"){
 
             //if ( Number.isInteger(this.state.result[pas])=== true){
+                
                 var temp = parseInt(this.state.result[pas]);
-                mapile_tempo.push(temp);
+                tableau2.push(temp);
+                
+               
             }
+
+            else {
+
+                tableau2.push(this.state.result[pas]);
+
+            }
+
+
+        }     
+
+            //else if (this.state.result[pas] == parseInt("*") || this.state.result[pas] == parseInt("/")|| this.state.result[pas] == parseInt("+") || this.state.result[pas] ==parseInt("-")){
+             
+
+            for (let pas = 0; pas <= tableau2.length-2 ; pas++) {
+          
+                if (tableau2[pas]==="*"){
+
                         
-
-            else if (tableau[pas] === "*" || tableau[pas] === "/"|| tableau[pas] === "+" || tableau[pas] ==="-"){
+                        //var tab_resultat =[];
+                        var temp2 = tableau2[pas-1]*tableau2[pas+1];
+                        tableau.push(temp2);
+                        
+                        //console.log(tableau2[pas]);
+                        //console.log(tableau2[pas+2]);
+                        //console.log(tableau2[pas]*tableau2[pas+1]);
 
                 
-                console.log(this.state.result[pas]);
-                mapile_tempo.push(this.state.result[pas]);
+            }}
+            console.log(tableau2);
+            console.log(tableau);
                 
-            }
+                // Affichage des signes dans le tableau 
+                //var temp_signe = this.state.result[pas];
+                //tableau2.push(temp_signe);
+            
+            
+            
 
-
-
-          }
+          
 
 
           // On agit directement sur la pile obtenant les opérations 
-          for(let pas = 0 ; pas <= mapile_tempo.length; pas ++){
+          for(let pas = 0 ; pas <= tableau2.length; pas ++){
 
 
-            if (this.state.result[pas] === "*" || this.state.result[pas] === "/"|| this.state.result[pas] === "+" || this.state.result[pas] ==="-"){
+            if (tableau2[pas] === "*" || tableau2[pas] === "/"|| tableau2[pas] === "+" || tableau2[pas] ==="-"){
 
 
                 var resultat = this.state.result[pas-2] * this.state.result[pas-1];
@@ -116,14 +147,14 @@ calculate = () => {
             }
 
 
-            if ( this.state.result[pas] === "/"){
+            if ( tableau2[pas] === "/"){
 
 
                 var resultat_division = this.state.result[0] / this.state.result[1];
                 this.state.result[pas].shift();
             }
 
-            if ( this.state.result[pas] === "+"){
+            if ( tableau2[pas] === "+"){
 
 
                 var resultat_addition = this.state.result[0] + this.state.result[1];
@@ -131,7 +162,7 @@ calculate = () => {
 
             }
 
-            if ( this.state.result[pas] === "-"){
+            if ( tableau2[pas] === "-"){
 
 
                 var resultat_soustraction = this.state.result[0] - this.state.result[1];
