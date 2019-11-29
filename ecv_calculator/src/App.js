@@ -22,7 +22,7 @@ class App extends Component {
         else if(button === "Del all"){
             this.reset()
         }
-        else if(button === "Del"){
+        else if(button === "Drop"){
             this.backspace()
         }
 
@@ -65,7 +65,14 @@ calculate = () => {
 
         var tableau = [];
         var tableau2 = [];
-        //var mapile_tempo_signe;
+
+        //definition d'un tableau qui ne contiendra que les chiffres
+
+        var tableau_sans_signes = [];
+
+        // Définition d'un tableau qui ne contiendra que les signes 
+
+        var tableau_sans_chiffre = [];
         
 
         // Init du tableau en String => Parcours du tableau ok 
@@ -90,6 +97,7 @@ calculate = () => {
                 
                 var temp = parseInt(this.state.result[pas]);
                 tableau2.push(temp);
+                tableau_sans_signes.push(temp);
                 
                
             }
@@ -97,6 +105,7 @@ calculate = () => {
             else {
 
                 tableau2.push(this.state.result[pas]);
+                tableau_sans_chiffre.push(this.state.result[pas])
 
             }
 
@@ -105,63 +114,94 @@ calculate = () => {
 
             //else if (this.state.result[pas] == parseInt("*") || this.state.result[pas] == parseInt("/")|| this.state.result[pas] == parseInt("+") || this.state.result[pas] ==parseInt("-")){
              
-
-            for (let pas = 0; pas <= tableau2.length-2 ; pas++) {
+                for (let pas = 0; pas <= tableau_sans_signes.length-2 ; pas++) {
+            for (let pas = 0; pas <= tableau_sans_chiffre.length-2 ; pas++) {
           
-                if (tableau2[pas]==="*"){
+                if (tableau_sans_chiffre[pas]==="*"){
 
                         
                         //var tab_resultat =[];
-                        var temp2 = tableau2[0]*tableau2[pas+1];
+                        var temp2 = tableau_sans_signes[0]*tableau_sans_signes[pas+1];
                         this.setState({
                                 result: temp2            
                         })
                         tableau.push(temp2);
                         
-                        //console.log(tableau2[pas]);
+                        console.log(tableau);
                         //console.log(tableau2[pas+2]);
                         //console.log(tableau2[pas]*tableau2[pas+1]);
 
                 
             }
 
-
-            if (tableau2[pas]==="+"){
+            if (tableau_sans_chiffre[pas]==="+"){
 
                         
-               
-                var temp2 = tableau2[0]+tableau2[pas+1];
+                //var tab_resultat =[];
+                var temp2 = tableau_sans_signes[0]+tableau_sans_signes[pas+1];
                 this.setState({
                         result: temp2            
                 })
                 tableau.push(temp2);
-                 }
+                
+                console.log(tableau);
+                //console.log(tableau2[pas+2]);
+                //console.log(tableau2[pas]*tableau2[pas+1]);
 
-                 if (tableau2[pas]==="/"){
-
-                        
-               
-                    var temp2 = tableau2[0]/tableau2[pas+1];
-                    this.setState({
-                            result: temp2            
-                    })
-                    tableau.push(temp2);
-                     }
-
-                     if (tableau2[pas]==="-"){
-
-                        
-               
-                        var temp2 = tableau2[0]-tableau2[pas+1];
-                        this.setState({
-                                result: temp2            
-                        })
-                        tableau.push(temp2);
-                         }
         
-        }
+    }
+
+    if (tableau_sans_chiffre[pas]==="/"){
+
+                        
+        //var tab_resultat =[];
+        var temp2 = tableau_sans_signes[0]/tableau_sans_signes[pas+1];
+        this.setState({
+                result: temp2            
+        })
+        tableau.push(temp2);
+        
+        console.log(tableau);
+        //console.log(tableau2[pas+2]);
+        //console.log(tableau2[pas]*tableau2[pas+1]);
+
+
+}
+
+if (tableau_sans_chiffre[pas]==="-"){
+
+                        
+    //var tab_resultat =[];
+    var temp2 = tableau_sans_signes[0]-tableau_sans_signes[pas+1];
+    this.setState({
+            result: temp2            
+    })
+    tableau.push(temp2);
+    
+    console.log(tableau);
+    //console.log(tableau2[pas+2]);
+    //console.log(tableau2[pas]*tableau2[pas+1]);
+
+
+}
+        
+        }}
+
+            tableau2.pop();
             console.log(tableau2);
-            console.log(tableau);
+
+
+            for (let pas = 0; pas <= tableau2.length-2 ; pas++) {
+            
+            this.setState({
+                result: tableau[0]         
+        })
+    }
+
+            tableau_sans_chiffre.pop();
+           
+            console.log(tableau_sans_signes);
+            console.log(tableau_sans_chiffre);
                 
                 // Affichage des signes dans le tableau 
                 //var temp_signe = this.state.result[pas];
@@ -174,42 +214,7 @@ calculate = () => {
 
 
           // On agit directement sur la pile obtenant les opérations 
-          for(let pas = 0 ; pas <= tableau2.length; pas ++){
-
-
-            if (tableau2[pas] === "*" || tableau2[pas] === "/"|| tableau2[pas] === "+" || tableau2[pas] ==="-"){
-
-
-                var resultat = this.state.result[pas-2] * this.state.result[pas-1];
-                this.state.result[pas].shift();
-
-            }
-
-
-            if ( tableau2[pas] === "/"){
-
-
-                var resultat_division = this.state.result[0] / this.state.result[1];
-                this.state.result[pas].shift();
-            }
-
-            if ( tableau2[pas] === "+"){
-
-
-                var resultat_addition = this.state.result[0] + this.state.result[1];
-                this.state.result[pas].shift();
-
-            }
-
-            if ( tableau2[pas] === "-"){
-
-
-                var resultat_soustraction = this.state.result[0] - this.state.result[1];
-                this.state.result[pas].shift();
-
-            }
-
-          }
+         //
          
 
         }
