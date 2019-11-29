@@ -16,6 +16,8 @@ class App extends Component{
                 <div className="calculator-body">
                     <h1>Calculatrice</h1>
                     <CalculatriceComponent/>
+                    <h2>Created by</h2>
+                    <h3>Alexander Venet & Jeremy Guibon</h3>
                 </div>
             </div>
         );

@@ -86,7 +86,7 @@ class Calculatrice extends Component {
                 </section>
                 
                 <section className="button">
-                    <button name="(" onClick={e => this.props.onClick(e.target.name)}>(</button>
+                    <button name="(" onClick={(e) => e.preventDefault}>()</button>
                     <button name="swap" onClick={() => this.swap()}>Swap</button>
                     <button name="Del" click={() => this.drop()}>Drop</button>
                     <button name="Del all" onClick={() => this.reset()}>Del all </button><br/>
