@@ -13,6 +13,13 @@ class Calculatrice extends Component {
         console.log('Push in the table');
     }
 
+    drop_backspace = () => {
+
+        const values = this.state.stack;
+        this.setState({stack: [0,...values].slice(0 , -1)}) 
+        console.log("Backspace OK ")
+    }
+
     checkValue = (value) => {
         const values = this.state.stack;
         let currentValue = values[0];
@@ -24,7 +31,7 @@ class Calculatrice extends Component {
 
     reset = () => {
         this.setState({stack: []})
-        console.log('reset')
+        console.log('reset');
     };
 
     
@@ -88,7 +95,7 @@ class Calculatrice extends Component {
                 <section className="button">
                     <button name="(" onClick={e => this.props.onClick(e.target.name)}>(</button>
                     <button name="swap" onClick={() => this.swap()}>Swap</button>
-                    <button name="Del" click={() => this.drop()}>Drop</button>
+                    <button name="Drop" onClick={() => this.drop_backspace()}>Drop</button>
                     <button name="Del all" onClick={() => this.reset()}>Del all </button><br/>
 
                     <button name="1" onClick={() => this.checkValue(1)}>1</button>
