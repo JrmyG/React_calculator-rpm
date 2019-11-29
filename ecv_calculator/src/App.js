@@ -19,8 +19,8 @@ class App extends Component {
             this.calculate()
         }
 
-        else if(button === "Del all"){
-            this.reset()
+        else if(button === "SWAP"){
+            this.SWAP()
         }
         else if(button === "Drop"){
             this.backspace()
@@ -200,8 +200,8 @@ if (tableau_sans_chiffre[pas]==="-"){
 
             tableau_sans_chiffre.pop();
            
-            console.log(tableau_sans_signes);
-            console.log(tableau_sans_chiffre);
+            //console.log(tableau_sans_signes);
+           //console.log(tableau_sans_chiffre);
                 
                 // Affichage des signes dans le tableau 
                 //var temp_signe = this.state.result[pas];
@@ -231,9 +231,21 @@ if (tableau_sans_chiffre[pas]==="-"){
         })
     };
 
-    backspace = () => {
+    SWAP = () => { 
+
+        var temp , temp2 ; 
+
+        for (let pas = 0; pas <= this.state.result.length ; pas++) {
+
+            
+            temp = parseInt(this.state.result[1]); 
+            temp2 = parseInt(this.state.result[0]);
+            console.log(temp);
+
+        }
         this.setState({
-            result: this.state.result.slice(0, -1)
+        
+
         })
     };
 
